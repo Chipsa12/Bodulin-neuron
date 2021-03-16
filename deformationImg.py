@@ -12,35 +12,35 @@ def deformationImg(path, nameDir, size=(64, 64)):
     elif nameDir in dirs:
         shutil.rmtree(root + nameDir)
     for filename in files:
-        typeFileName = filename.split('.')[-1]
+        splitFileName = filename.split('.')
         try:
             img = Image.open(root + filename)
-            if typeFileName in typeImg:
+            if splitFileName[-1] in typeImg:
                 resized_img = img.resize(size, Image.ANTIALIAS)
                 resized_img.save(root + nameDir + filename)
             else:
                 convertImg = img.convert('RGB')
-                convertImg.save(typeFileName[0] + '.jpg')
                 resized_img = convertImg.resize(size, Image.ANTIALIAS)
-                resized_img.save(root + nameDir + typeFileName[0] + '.jpg')
+                resized_img.save(root + nameDir + splitFileName[0] + '.jpg')
                 print('Изменили формат изображения: ', filename)
         except BaseException:
             print('Открываемый файл не является форматом изображения: ', filename)
             continue
 
 
-def shakalAll(path):
+def deformationAll(path, nameDir):
     root, dirs, files = next(os.walk(path))
-    print(root, dirs, files)
     for dir in dirs:
-        if dir == 'Others':
+        if os.path.exists(path + dir + '/'):
             root_oth, dirs_oth, files_oth = next(os.walk(path + dir + '/'))
             for dir_oth in dirs_oth:
-                deformationImg(path + dir + '/' + dir_oth + '/')
-                print('other')
-        deformationImg(path + dir + '/')
-        print('vnutri papki')
+                deformationImg(path + dir + '/' + dir_oth + '/', nameDir)
+                print('Внутри папки:', dir)
+        deformationImg(path + dir + '/', nameDir)
+        print('Внутри папки:', dir)
 
 
-deformationImg('DataSet/Lisina/', 'shakal/')
-print('ok')
+if __name__ == '__main__':
+    deformationAll('DataSet/', 'shakal/')
+    print('ok')
+
