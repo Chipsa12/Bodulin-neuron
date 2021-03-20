@@ -4,8 +4,8 @@ import shutil
 from PIL import Image
 
 
-def deformationImg(path, nameDir, size=(64, 64)):
-    typeImg = ['jpg', 'png', 'jpeg']
+def deformationImg(path, nameDir, size=(100,100)):
+    typeImg = ['jpg']
     root, dirs, files = next(os.walk(path))
     if not os.path.exists(root + nameDir):
         os.mkdir(root + nameDir)
