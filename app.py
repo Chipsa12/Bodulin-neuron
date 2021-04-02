@@ -7,6 +7,7 @@ from application.image.Image import Image
 async def getImagesHandler(request):
     post = await request.json()
     images = post.get("images")
+    response = []
     for image in images:
         print(image["name"])
         Image.decodeImage(image["name"], image["result"])

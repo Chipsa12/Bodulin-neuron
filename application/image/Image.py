@@ -10,6 +10,5 @@ class Image:
     @staticmethod
     def decodeImage(imageName, encryptedImage):
         result = re.split(r",", encryptedImage, maxsplit=1)
-        imageFormat = ""
         binaryImage = base64.b64decode(result[1])
         return Image(imageName, binaryImage)
