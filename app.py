@@ -10,7 +10,7 @@ async def getImagesHandler(request):
     response = []
     for image in images:
         print(image["name"])
-        Image.decodeImage(image["name"], image["result"])
+        Image.decodeImage(image["name"], image["image"])
 
     return web.Response(text="Получил", content_type="text")
 
