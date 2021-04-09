@@ -2,7 +2,9 @@ from aiohttp import web
 import aiohttp_cors
 
 from application.modules.image.Image import Image
-from application.modules.neuron.definitionPeopleInGroup import definitionPeople
+
+
+# from application.modules.neuron.definitionPeopleInGroup import definitionPeople
 
 async def getImagesHandler(request):
     post = await request.json()
@@ -10,7 +12,8 @@ async def getImagesHandler(request):
     response = []
     for image in images:
         print(image["name"])
-        response.append(definitionPeople(Image.decodeImage(image["name"], image["image"])))
+        Image.decodeImage(image["name"], image["image"])
+        # response.append(definitionPeople(Image.decodeImage(image["name"], image["image"])))
 
     return web.Response(text="Привет, Андрей!!!", content_type="text")
 
