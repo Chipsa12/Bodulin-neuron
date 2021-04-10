@@ -3,26 +3,22 @@ from tensorflow.python.keras.preprocessing import image
 from tensorflow.python.keras.saving.save import load_model
 import tensorflow as tf
 import numpy as np
-# model = load_model('definitionPeople.h5')
-with tf.Session(graph=tf.Graph()) as sess:
-    tf.saved_model.loader.load(sess, ["serve"], 'definitionPeople.h5')
-    graph = tf.get_default_graph()
-    print(graph.get_operations())
-    sess.run()
+import io
 
-def resizedImg(image, size=(100, 100)):
-    return Image.open(image).resize(size, Image.ANTIALIAS)
+model = load_model('application/modules/neuron/definitionPeople.h5')
 
 
-def definitionPeople(imagePeople):
+def resizedImg(binaryImage, size=(100, 100)):
+    return Image.open(io.BytesIO(binaryImage)).resize(size, Image.ANTIALIAS)
+
+
+def definitionPeople(binaryImage):
     class_names = ['Бельтюков', 'Бодулин', 'Иванов', 'Корпачев', 'Кривова',
                    'Лисина', 'Макаров', 'Пушин', 'Рябовалов', 'Тарасов', 'Титов',
                    'Фионов', 'Шудегов'
                    ]
 
-    shakal = resizedImg(imagePeople.binary)
-
-    img = Image.open(shakal)
+    img = resizedImg(binaryImage)
     x = image.array_to_img(img)
 
     # x = x.reshape(1,10000)
@@ -35,8 +31,14 @@ def definitionPeople(imagePeople):
         prediction = np.argmax(prediction)
         print('-------------')
         print('№ class', class_names[prediction])
+        print('prediction', prediction)
         print('-------------')
+        return {
+            'person': class_names[prediction],
+            'accuracy': str(prediction)
+        }
     except ValueError:
         print('-------------')
         print('Я тупой, никого не узнал!!')
         print('-------------')
+        return None

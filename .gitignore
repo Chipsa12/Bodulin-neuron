@@ -2,3 +2,4 @@ venv
 .idea
 application/**/__pycache__
 application/modules/neuron/DataSetShakal
+images
