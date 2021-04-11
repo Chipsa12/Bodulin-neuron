@@ -31,7 +31,6 @@ def definitionPeople(binaryImage):
         prediction = np.argmax(prediction)
         print('-------------')
         print('№ class', class_names[prediction])
-        print('prediction', prediction)
         print('-------------')
         return {
             'person': class_names[prediction],
