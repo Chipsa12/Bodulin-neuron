@@ -5,6 +5,7 @@ import tensorflow as tf
 import numpy as np
 import io
 
+
 model = load_model('application/modules/neuron/definitionPeople.h5')
 
 
@@ -17,27 +18,29 @@ def definitionPeople(binaryImage):
                    'Лисина', 'Макаров', 'Пушин', 'Рябовалов', 'Тарасов', 'Титов',
                    'Фионов', 'Шудегов'
                    ]
+    for i in binaryImage:
+        img = resizedImg(i)
+        # img = Image.open(binaryImage)
+        x = image.array_to_img(img)
 
-    img = resizedImg(binaryImage)
-    x = image.array_to_img(img)
+        # x = x.reshape(1,10000)
+        # x = 255 - x
+        # x /= 255
+        # print(model.__call__(np.expand_dims(x, axis=0)))
 
-    # x = x.reshape(1,10000)
-    # x = 255 - x
-    # x /= 255
-    # print(model.__call__(np.expand_dims(x, axis=0)))
-
-    try:
-        prediction = model.predict(np.expand_dims(x, axis=0))
-        prediction = np.argmax(prediction)
-        print('-------------')
-        print('№ class', class_names[prediction])
-        print('-------------')
-        return {
-            'person': class_names[prediction],
-            'accuracy': str(prediction)
-        }
-    except ValueError:
-        print('-------------')
-        print('Я тупой, никого не узнал!!')
-        print('-------------')
-        return None
+        # for i in binaryImage:
+        try:
+            prediction = model.predict(np.expand_dims(x, axis=0))
+            prediction = np.argmax(prediction)
+            print('-------------')
+            print('№ class', class_names[prediction])
+            print('-------------')
+            return {
+                'person': class_names[prediction],
+                'accuracy': str(prediction)
+            }
+        except ValueError:
+           print('-------------')
+           print('Я тупой, никого не узнал!!')
+           print('-------------')
+           return None

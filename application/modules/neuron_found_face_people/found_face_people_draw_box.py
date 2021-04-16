@@ -30,7 +30,7 @@ def draw_image_with_boxes(filename, result_list):
     pyplot.show()
 
 
-filename = 'bodulin.jpg'
+filename = '../../../bodulin.jpg'
 # load image from file
 pixels = pyplot.imread(filename)
 # create the detector, using default weights

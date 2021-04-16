@@ -30,6 +30,7 @@ def deformationImg(path, nameDir, size=(100,100)):
 
 def deformationAll(path, nameDir):
     root, dirs, files = next(os.walk(path))
+    print(root, dirs, files)
     for dir in dirs:
         if os.path.exists(path + dir + '/'):
             root_oth, dirs_oth, files_oth = next(os.walk(path + dir + '/'))
@@ -40,7 +41,7 @@ def deformationAll(path, nameDir):
         print('Внутри папки:', dir)
 
 
-if __name__ == '__main__':
-    deformationAll('DataSet/', 'shakal/')
-    print('ok')
+# if __name__ == '__main__':
+#     deformationAll('DataSet/', 'shakal/')
+#     print('ok')
 
