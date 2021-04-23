@@ -13,20 +13,19 @@ def deformationImg(path, nameDir, size=(100,100)):
         shutil.rmtree(root + nameDir)
     for filename in files:
         splitFileName = filename.split('.')
-        try:
-            img = Image.open(root + filename)
-            if splitFileName[-1] in typeImg:
-                resized_img = img.resize(size, Image.ANTIALIAS)
-                resized_img.save(root + nameDir + filename)
-            else:
-                convertImg = img.convert('RGB')
-                resized_img = convertImg.resize(size, Image.ANTIALIAS)
-                resized_img.save(root + nameDir + splitFileName[0] + '.jpg')
-                print('Изменили формат изображения: ', filename)
-        except BaseException:
-            print('Открываемый файл не является форматом изображения: ', filename)
-            continue
-
+        # try:
+        img = Image.open(root + filename)
+        if splitFileName[-1] in typeImg:
+            resized_img = img.resize(size, Image.ANTIALIAS)
+            resized_img.save(root + nameDir + filename)
+        else:
+            convertImg = img.convert('RGB')
+            resized_img = convertImg.resize(size, Image.ANTIALIAS)
+            resized_img.save(root + nameDir + splitFileName[0] + '.jpg')
+            print('Изменили формат изображения: ', filename)
+        #   except BaseException:
+        #     print('Открываемый файл не является форматом изображения: ', filename)
+        #     continue
 
 def deformationAll(path, nameDir):
     root, dirs, files = next(os.walk(path))

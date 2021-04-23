@@ -6,6 +6,7 @@ import json
 from application.modules.image.Image import Image
 from application.modules.neuron.definitionPeopleInGroup import definitionPeople
 from application.modules.neuron_found_face_people.found_face_people_separately_face import main
+from application.modules.neuron.deformationImg import deformationImg
 
 
 async def getImagesHandler(request):
@@ -33,8 +34,7 @@ cors = aiohttp_cors.setup(app, defaults={
 for route in list(app.router.routes()):
     cors.add(route)
 
-# arr = main('bodulin.jpg')
+ #arr = main('bodulin.jpg')
 
-# definitionPeople('img1.jpg')
-
+deformationImg('test/img/', 'shakal/')
 web.run_app(app, port=9000)

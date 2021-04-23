@@ -24,8 +24,8 @@ def main(filename):
             arr.append(data[y1:y2, x1:x2])
             pyplot.savefig('face_found_people/img' + str(i) + '.jpg')
             deformationImg('face_found_people/', 'deformation_img/')
-        # show the plot
-        # pyplot.show()
+            # show the plot
+            # pyplot.show()
 
 
     # load image from file
